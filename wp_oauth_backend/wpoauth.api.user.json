@@ -1,0 +1,29 @@
+{
+   id:10000752,
+   name:"lawrence McDaniel",
+   first_name:"lawrence",
+   last_name:"McDaniel",
+   full_name:"lawrence McDaniel",
+   uuid:"5a61ea7f-84fc-4fd3-a976-05a1fa446e55",
+   support_identifier:"cs_3f68c7a4",
+   is_test:false,
+   faculty_status:"no_faculty_info",
+   self_reported_role:"student",
+   self_reported_school:"University of North Texas",
+   school_type:"unknown_school_type",
+   contact_infos:[
+      {
+         id:1385,
+         type:"EmailAddress",
+         value:"lpm0073@gmail.com",
+         is_verified:true,
+         is_guessed_preferred:true
+      }
+   ],
+   applications:[
+      {
+         id:15,
+         name:"Rover"
+      }
+   ]
+}
