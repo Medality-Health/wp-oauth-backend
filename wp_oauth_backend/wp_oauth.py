@@ -10,12 +10,12 @@ logger = getLogger(__name__)
 PROBLEMATIC_USERS = []
 class WPOAuth2(BaseOAuth2):
 
-    """Rover OAuth authentication backend"""
+    """WP OAuth authentication backend"""
     name = 'wp-oauth2'
 
     base_url = settings.WPOAUTH_BACKEND_BASE_URL
     CLIENT_ID = settings.WPOAUTH_BACKEND_CLIENT_ID
-    CLIENT_SECRET = settings.WPOAUTH_BACKEND_CLIENT_SECRET    
+    CLIENT_SECRET = settings.WPOAUTH_BACKEND_CLIENT_SECRET
     SOCIAL_AUTH_SANITIZE_REDIRECTS = False
     ACCESS_TOKEN_METHOD = 'POST'
     EXTRA_DATA = []
