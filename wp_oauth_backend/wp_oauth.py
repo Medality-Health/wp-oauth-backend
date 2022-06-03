@@ -11,7 +11,7 @@ PROBLEMATIC_USERS = []
 class WPOAuth2(BaseOAuth2):
 
     """Rover OAuth authentication backend"""
-    name = 'wpoauth2'
+    name = 'wp-oauth2'
 
     base_url = settings.WPOAUTH_BACKEND_BASE_URL
     CLIENT_ID = settings.WPOAUTH_BACKEND_CLIENT_ID
@@ -35,15 +35,11 @@ class WPOAuth2(BaseOAuth2):
 
     def get_user_details(self, response):
         """Return user details from the WP account"""
-        id = str(response.get('id'))
-
         user_details = {
-            'id':  id,
-            'username': response.get('user_email'),
+            'id': int(response.get('ID')),
+            'username': response.get('user_login'),
             'email': response.get('user_email'),
-            # 'first_name': response.get('first_name'),
-            # 'last_name': response.get('last_name'),
-            'fullname': response.get('display_name'),            
+            'fullname': response.get('display_name'),
         }
         logger.info('get_user_details() -  {}'.format(user_details))
         if response.get('email') in PROBLEMATIC_USERS:
@@ -54,7 +50,7 @@ class WPOAuth2(BaseOAuth2):
 
     def user_data(self, access_token, *args, **kwargs):
         """Loads user data from service"""
-        url = self.USER_QUERY + urlencode({
+        url = f'{self.USER_QUERY}?' + urlencode({
             'access_token': access_token
         })
 
