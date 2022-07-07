@@ -5,4 +5,4 @@ It's mostly used for Open edX but can be used elsewhere.
 """
 
 
-__version__ = '0.3.0'
+__version__ = '0.4.0'
