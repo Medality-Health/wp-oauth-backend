@@ -7,19 +7,27 @@ from django.conf import settings
 from logging import getLogger
 logger = getLogger(__name__)
 
-PROBLEMATIC_USERS = []
+
 class WPOAuth2(BaseOAuth2):
 
     """WP OAuth authentication backend"""
     name = 'wp-oauth2'
-
-    base_url = settings.WPOAUTH_BACKEND_BASE_URL
-    CLIENT_ID = settings.WPOAUTH_BACKEND_CLIENT_ID
-    CLIENT_SECRET = settings.WPOAUTH_BACKEND_CLIENT_SECRET
     SOCIAL_AUTH_SANITIZE_REDIRECTS = False
     ACCESS_TOKEN_METHOD = 'POST'
     EXTRA_DATA = []
     SCOPE_SEPARATOR = ','
+
+    @property
+    def base_url(self):
+        return settings.WPOAUTH_BACKEND_BASE_URL
+
+    @property
+    def CLIENT_ID(self):
+        return settings.WPOAUTH_BACKEND_CLIENT_ID
+
+    @property
+    def CLIENT_SECRET(self):
+        return settings.WPOAUTH_BACKEND_CLIENT_SECRET
 
     @property
     def AUTHORIZATION_URL(self) -> str:
@@ -42,10 +50,6 @@ class WPOAuth2(BaseOAuth2):
             'fullname': response.get('display_name'),
         }
         logger.info('get_user_details() -  {}'.format(user_details))
-        if response.get('email') in PROBLEMATIC_USERS:
-            logger.warning('get_user_details() -  user is a PROBLEMATIC_USER. disabling output')
-            return None
-
         return user_details
 
     def user_data(self, access_token, *args, **kwargs):
